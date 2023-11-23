@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Book Keeper</h1>
+    </div>
+    <div class="container">
+        <div class="book-container">
+            <h2>And then there were none</h2>
+            <h5>Agatha Christe</h5>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad perspiciatis deserunt iusto quibusdam tenetur, corrupti odit repellat magni distinctio consequatur sequi, assumenda quasi sit officia beatae qui aspernatur atque. Praesentium.
+            </p>
+            <button class="del" id="del-btn" onclick="del(event)">Delete</button>
+        </div>
+
+        <div class="overlay"></div>
+        <div class="popup">
+            <h2>Add Book</h2>
+            <form action="">
+                <input type="text" placeholder="Enter book title" id="title-input">
+                <input type="text" placeholder="Enter author name" id="author-name">
+                <textarea placeholder="Enter book description" id="book-desc" cols="30" rows="5"></textarea>
+                <button id="addBook">ADD</button>
+                <button id="pCancel">CANCEL</button>
+            </form>
+        </div>
+    </div>
+
+    <button class="add" id="add-btn">+</button>
+</body>
+</html>
+<style>
+    *{
+        margin: 0;
+    }
+
+    .container{
+        margin: 2rem;
+    }
+
+    .book-container{
+        margin-right: 1rem;
+        display: inline-block;
+        vertical-align: top;
+        width: 25%;
+        background-color: black;
+        color: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .del{
+        color: black;
+        background-color: coral;
+        border-radius: 0.5rem;
+        border: none;
+        margin-top: 1rem;
+        padding: 5px 10px;
+    }
+
+    .add{
+        color: black;
+        background-color: coral;
+        border-radius: 100%;
+        padding: 2rem;
+        font-size:larger;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        border: none;
+    }
+
+    .navbar{
+        background-color:coral;
+        height: 4rem;
+        width: 100%;
+        padding: 2rem;
+    }
+    .overlay{
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.8;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        display: none;
+    }
+
+    .popup{
+        display: none;
+        position: absolute;
+        z-index: 2;
+        width: 35%;
+        padding: 2.5rem;
+        left: 30%;
+        top: 20%;
+        background-color: coral;
+        border-radius: 0.75rem;
+    }
+
+    .popup input{
+        border: none;
+        border-bottom: solid black 2px;
+        width: 95%;
+        margin: 5px;
+        padding: 5px;
+        background: transparent;
+        color: black;
+        font-size: 20px;
+    }
+
+    .popup textarea{
+        font-size: 20px;
+        border: solid black 2px;
+        width: 95%;
+        margin: 5px;
+        padding: 5px;
+        background: transparent;
+        color: black;
+    }
+
+    .popup input::placeholder{
+        color: black;
+    }
+
+    .popup textarea::placeholder{
+        color: black;
+    }
+
+    .popup button{
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        margin: 5px;
+    }
+</style>
+<script>
+    var over = document.querySelector(".overlay");
+    var pop = document.querySelector(".popup");
+    var addButton = document.querySelector(".add");
+    var popupCancelBtn = document.querySelector("#pCancel");
+    var addBookBtn = document.querySelector('#addBook');
+    var cont = document.querySelector('.container');
+    var bookCont  = document.querySelector('.book-container');
+    var nameInput = document.getElementById('title-input');
+    var authorInput = document.getElementById('author-name');
+    var bookDesc = document.getElementById('book-desc');
+
+    // Add new book Button
+    addButton.addEventListener('click', function(){
+        nameInput.value = null;
+        authorInput.value = null;
+        bookDesc.value = null;
+        over.style.display = "block";
+        pop.style.display = "block";
+    });
+    // Cancel popup button
+    popupCancelBtn.addEventListener('click', function(event){
+        event.preventDefault();
+        over.style.display = "none";
+        pop.style.display = "none";
+    })
+
+    // Add book details button
+    addBookBtn.addEventListener('click', function(event){
+        event.preventDefault();
+
+        var div = document.createElement('div');
+        div.setAttribute('class', 'book-container');
+        div.innerHTML= `<h2>${nameInput.value}</h2>
+                        <h5>${authorInput.value}</h5> 
+                        <p>${bookDesc.value}</p>
+                        <button class="del" id="del-btn" onclick="del(event)">Delete</button>`;
+        cont.append(div);
+
+        over.style.display = "none";
+        pop.style.display = "none";
+    }) ;
+
+    function del(event){
+        event.target.parentElement.remove();
+    }
+
+   
+</script>
