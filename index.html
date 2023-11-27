@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="navbar">
@@ -13,9 +16,9 @@
     <div class="container">
         <div class="book-container">
             <h2>And then there were none</h2>
-            <h5>Agatha Christe</h5>
+            <h4>Agatha Christe</h4>
             <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad perspiciatis deserunt iusto quibusdam tenetur, corrupti odit repellat magni distinctio consequatur sequi, assumenda quasi sit officia beatae qui aspernatur atque. Praesentium.
+                Ten strangers are invited to a secluded island, only to find themselves accused of crimes they claim they didn't commit. As they face judgment one by one, tension rises, and the characters must unravel the mystery of their own demise before it's too late. The novel is a masterful exploration of guilt, justice, and the consequences of one's actions.
             </p>
             <button class="del" id="del-btn" onclick="del(event)">Delete</button>
         </div>
@@ -37,12 +40,21 @@
 </body>
 </html>
 <style>
+    
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
     *{
         margin: 0;
+        font-family: 'Open Sans', sans-serif;
     }
 
     .container{
         margin: 2rem;
+    }
+
+    h4{
+        margin:0.75rem 0rem;
+        font-style: italic;
     }
 
     .book-container{
@@ -179,7 +191,7 @@
         var div = document.createElement('div');
         div.setAttribute('class', 'book-container');
         div.innerHTML= `<h2>${nameInput.value}</h2>
-                        <h5>${authorInput.value}</h5> 
+                        <h4>${authorInput.value}</h4> 
                         <p>${bookDesc.value}</p>
                         <button class="del" id="del-btn" onclick="del(event)">Delete</button>`;
         cont.append(div);
